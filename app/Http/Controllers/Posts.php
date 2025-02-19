@@ -11,7 +11,7 @@ class Posts extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
