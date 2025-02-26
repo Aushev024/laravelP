@@ -4,6 +4,10 @@
 <hr>
 <ul>
     @foreach($posts as $post)
-        <li>{{ $post->id }}, <strong>{{ $post->title }}</strong></li>
+        <li>{{ $post->id }}, <strong>{{ $post->title }}</strong>
+            <a href="{{ route('posts.show', [$post->id]) }}">Show</a>
+            <a href="/posts/{{ $post->id }}/edit">Edit</a>
+
+        </li>
     @endforeach
 </ul>

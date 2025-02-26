@@ -61,6 +61,7 @@ class Posts extends Controller
     public function edit(string $id)
     {
         $post = Post::findOrFail($id);
+
         return view('posts.edit', compact('post'));
     }
 
@@ -69,14 +70,14 @@ class Posts extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $post = Post::find($id);
-        $post->fill($request->validated([
+        $post = Post::findOrFail($id);
+
+        $validated = $request->validate([
             'title' => 'required|min:5|max:100',
             'content' => 'required|min:10|max:1000',
-        ]));
-        $post->save();
-
-        return redirect('/posts/' . $post->id);
+        ]);
+        $post->update($validated);
+        return redirect()->route('posts.show', $post->id);
 
     }
 
