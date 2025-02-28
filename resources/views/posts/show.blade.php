@@ -1,4 +1,3 @@
-<h2>{{ $post->title }}</h2>
-<p>{{ $post->content }}</p>
-<a href="/posts/{{ $post->id }}/edit">Редактировать</a>
-
+<x-layout.main title="{{$post->title}}">
+    <p>{{ $post->content }}</p>
+</x-layout.main>

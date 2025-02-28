@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\Posts\Save as SaveRequest;
+
 
 class Posts extends Controller
 {
@@ -14,9 +16,7 @@ class Posts extends Controller
     {
         $posts = Post::all();
 
-        return view('posts.index', [
-            'posts' => $posts,
-        ]);
+        return view('posts.index', compact('posts'));
 
     }
 
@@ -31,14 +31,9 @@ class Posts extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SaveRequest $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|min:5|max:100',
-            'content' => 'required|min:10|max:1000',
-        ]);
-
-        $post = Post::create($validated);
+        $post = Post::create($request->validated());
 
         return redirect('/posts/' . $post->id);
     }
@@ -50,9 +45,7 @@ class Posts extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view('posts.show', [
-            'post' => $post,
-        ]);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -68,15 +61,11 @@ class Posts extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SaveRequest $request, string $id)
     {
         $post = Post::findOrFail($id);
+        $post->update($request->validated());
 
-        $validated = $request->validate([
-            'title' => 'required|min:5|max:100',
-            'content' => 'required|min:10|max:1000',
-        ]);
-        $post->update($validated);
         return redirect()->route('posts.show', $post->id);
 
     }

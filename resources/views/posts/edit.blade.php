@@ -3,26 +3,8 @@
     @method('PUT')
     @csrf
 
-
-    <div>
-        Title: <input name="title" value="{{ $post->title }}">
-        @error('title')
-        <div style="color: red">{{ $message }}</div>
-        @enderror
-    </div>
-    <div>Content: <textarea name="content">{{ $post->content }}</textarea></div>
-
-    @if($errors->any())
-        <hr>
-        <div style="color: red">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        <hr>
-    @endif
+    <x-input label="Post title" name="title" default-value="{{ $post->title }}" />
+    <x-input label="Post content" name="content" default-value="{{ $post->content }}" />
 
     <button>Update</button>
 </form>
