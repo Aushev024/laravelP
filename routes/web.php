@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Posts;
+use App\Http\Controllers\Cars;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +26,5 @@ Route::put('/posts/{id}', [Posts::class, 'update'])->name('posts.update');
 Route::delete('/posts/{id}', [Posts::class, 'destroy']);
 
 
-
+Route::resource('cars', Cars::class);
 
