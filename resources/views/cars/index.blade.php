@@ -1,5 +1,5 @@
 <x-layout.main title="Cars">
-    <a href="{{ route('cars.create') }}">Create cars</a>
+    <a href="{{ route('cars.create') }}">Добавить авто</a>
     <div class="row">
         @foreach($cars as $car)
             <div class="col m-3">

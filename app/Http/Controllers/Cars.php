@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Cars\Store as StoreRequest;
+use App\Http\Requests\Cars\Update as UpdateRequest;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
@@ -39,32 +40,36 @@ class Cars extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Car $car)
     {
-        //
+        return view('cars.show', compact('car'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Car $car)
     {
-        //
+//        $car = Car::findOrfail($id);
+        $transmissions = config('app-cars.transmissions');
+        return view('cars.edit', compact('car', 'transmissions'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, Car $car)
     {
-        //
+        $car->update($request->validated());
+        return redirect()->route('cars.show', [$car->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Car $car)
     {
-        //
+        $car->delete();
+        return redirect()->route('cars.index');
     }
 }
