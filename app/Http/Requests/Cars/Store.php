@@ -35,7 +35,7 @@ class Store extends FormRequest
     }
 
     protected function winUniqueRule(){
-        return Rule::unique(Car::class, 'win');
+        return Rule::unique(Car::class, 'win')->whereNull('deleted_at');
     }
 
 }

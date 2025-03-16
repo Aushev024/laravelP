@@ -17,22 +17,35 @@
 <body>
 
     <header>
+
         <div class="container border-bottom pb-2">
             LOGO
         </div>
+
     </header>
     <div>
+
         <div class="container">
+            @if(session('alert'))
+                <div class="alert alert-info" role="alert">
+                    {{ session('alert') }}
+                </div>
+            @endif
+
             <h1>{{$h1 ?? $title}}</h1>
+
             {{$slot}}
         </div>
+
     </div>
 
 
     <footer>
+
         <div class="container border-top pt-2">
             Footer
         </div>
+
     </footer>
 
 
